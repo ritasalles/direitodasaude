@@ -88,7 +88,10 @@ export default function Footer() {
                 </a>
               </li>
               <li className="text-background/80">
-                São Paulo, SP
+                Avenida Paulista, 2028, 11º Andar
+              </li>
+              <li className="text-background/80 text-sm">
+                Bela Vista, São Paulo/SP
               </li>
             </ul>
           </div>

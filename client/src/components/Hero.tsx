@@ -17,11 +17,11 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663330535777/fTMRKT8iPzDrzNpUA9nZT8/hero-advocacia-HyXMwmWFKVHcQ2vbABR23s.webp"
-          alt="Escritório de advocacia profissional"
+          src="https://d2xsxph8kpxj0f.cloudfront.net/310519663330535777/fTMRKT8iPzDrzNpUA9nZT8/IMG_0284_5efa50a2.webp"
+          alt="Rita Salles - Advogada especialista em Direito da Saúde"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
       {/* Content */}

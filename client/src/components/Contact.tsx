@@ -89,7 +89,8 @@ export default function Contact() {
                 <MapPin className="contact-icon" />
                 <div>
                   <p className="font-semibold text-foreground">Endereço</p>
-                  <p className="text-foreground/70">São Paulo, SP</p>
+                  <p className="text-foreground/70">Avenida Paulista, 2028, 11º Andar, Cj. 111</p>
+                  <p className="text-foreground/70">Bela Vista, São Paulo/SP</p>
                   <p className="text-xs text-foreground/50 mt-1">Atendimento presencial e online</p>
                 </div>
               </div>
