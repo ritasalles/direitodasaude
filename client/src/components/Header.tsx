@@ -27,7 +27,7 @@ export default function Header() {
             <img
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663330535777/fTMRKT8iPzDrzNpUA9nZT8/logotipo2026_87163b46.png"
               alt="Rita Salles Advocacia - Direito da Saúde"
-              className="h-20 w-auto"
+              className="h-32 w-auto"
               title="Rita Salles Advocacia"
             />
           </div>
