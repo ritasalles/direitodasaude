@@ -20,20 +20,20 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border shadow-sm">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <div className="flex-shrink-0">
             <img
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663330535777/fTMRKT8iPzDrzNpUA9nZT8/logotipo2026_87163b46.png"
               alt="Rita Salles Advocacia - Direito da Saúde"
-              className="h-64 w-auto"
+              className="h-20 w-auto"
               title="Rita Salles Advocacia"
             />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6 ml-auto">
             <button
               onClick={() => scrollToSection('experiencia')}
               className="text-foreground hover:text-accent font-medium transition-colors"

@@ -102,7 +102,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-background/70">
             <p>&copy; {currentYear} Rita Salles Advocacia. Todos os direitos reservados.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-background transition-colors">
+              <a href="/politica-privacidade" className="hover:text-background transition-colors">
                 Política de Privacidade
               </a>
               <a href="#" className="hover:text-background transition-colors">

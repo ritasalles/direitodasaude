@@ -19,13 +19,13 @@ export default function Hero() {
         <img
           src="https://d2xsxph8kpxj0f.cloudfront.net/310519663330535777/fTMRKT8iPzDrzNpUA9nZT8/IMG_0284_5efa50a2.webp"
           alt="Rita Salles - Advogada especialista em Direito da Saúde"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/20"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-20 md:py-32 lg:py-40">
+      <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
         <div className="max-w-2xl">
           <p className="text-accent font-semibold text-lg mb-4 uppercase tracking-wide">
             Direito da Saúde
