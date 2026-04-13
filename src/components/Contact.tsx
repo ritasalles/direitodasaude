@@ -1,11 +1,11 @@
 /**
  * Contact Section - Rita Salles Advocacia
  * Design: Professional contact form with clickable contact methods
- * Features: Form submission, phone/WhatsApp/email links, office hours
+ * Features: Form submission via Formspree, phone/WhatsApp/email links, office hours
  */
 
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Loader2 } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -21,22 +21,43 @@ export default function Contact() {
     phone: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to a backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', phone: '', message: '' });
-      setSubmitted(false);
-    }, 3000);
+    setStatus('submitting');
+
+    try {
+      const response = await fetch('https://formspree.io/f/mwpvjokl', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `Novo contato do site: ${formData.name}`,
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   const phoneNumber = '5511921225287';
@@ -122,10 +143,17 @@ export default function Contact() {
           <div className="bg-card rounded-lg p-8 border border-border">
             <h3 className="text-2xl font-bold text-foreground mb-6">Envie uma Mensagem</h3>
 
-            {submitted && (
+            {status === 'success' && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <p className="text-green-800 font-semibold">Mensagem enviada com sucesso!</p>
                 <p className="text-green-700 text-sm mt-1">Entraremos em contato em breve.</p>
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-800 font-semibold">Erro ao enviar mensagem.</p>
+                <p className="text-red-700 text-sm mt-1">Por favor, tente novamente ou use o WhatsApp.</p>
               </div>
             )}
 
@@ -142,7 +170,8 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Seu nome"
                   required
-                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
+                  disabled={status === 'submitting'}
+                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                 />
               </div>
 
@@ -158,7 +187,8 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="seu@email.com"
                   required
-                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
+                  disabled={status === 'submitting'}
+                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                 />
               </div>
 
@@ -174,7 +204,8 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="(11) 9999-9999"
                   required
-                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
+                  disabled={status === 'submitting'}
+                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
                 />
               </div>
 
@@ -190,16 +221,25 @@ export default function Contact() {
                   placeholder="Conte-nos sobre seu caso..."
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+                  disabled={status === 'submitting'}
+                  className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent resize-none disabled:opacity-50"
                 />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full btn-gold py-3 rounded-lg font-semibold text-lg hover:shadow-lg transition-all"
+                disabled={status === 'submitting'}
+                className="w-full btn-gold py-3 rounded-lg font-semibold text-lg hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70"
               >
-                Enviar Mensagem
+                {status === 'submitting' ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Enviando...
+                  </>
+                ) : (
+                  'Enviar Mensagem'
+                )}
               </button>
             </form>
           </div>
