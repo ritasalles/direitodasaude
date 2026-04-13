@@ -1,65 +1,15 @@
 /**
  * Contact Section - Rita Salles Advocacia
  * Design: Professional contact form with clickable contact methods
- * Features: Form submission via internal API, phone/WhatsApp/email links, office hours
+ * Features: Form submission via @formspree/react, phone/WhatsApp/email links, office hours
  */
 
-import { useState } from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-}
-
 export default function Contact() {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('submitting');
-    setErrorMessage('');
-
-    try {
-      // Usando a API interna para maior segurança e controle
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-        // Feedback visual de sucesso por 7 segundos
-        setTimeout(() => setStatus('idle'), 7000);
-      } else {
-        const data = await response.json();
-        throw new Error(data.error || 'Falha no envio');
-      }
-    } catch (error) {
-      console.error('Submission error:', error);
-      setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Erro inesperado');
-      setTimeout(() => setStatus('idle'), 7000);
-    }
-  };
+  // Usando o hook oficial do Formspree conforme guia de integração
+  const [state, handleSubmit] = useForm('meevqvbw');
 
   const phoneNumber = '5511921225287';
   const whatsappNumber = '5511921225287';
@@ -131,7 +81,7 @@ export default function Contact() {
           <div className="bg-card rounded-xl p-8 border border-border shadow-sm relative overflow-hidden">
             <h3 className="text-2xl font-bold text-foreground mb-6">Envie uma Mensagem</h3>
 
-            {status === 'success' && (
+            {state.succeeded && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
                 <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
                 <div>
@@ -141,83 +91,88 @@ export default function Contact() {
               </div>
             )}
 
-            {status === 'error' && (
+            {state.errors && state.errors.length > 0 && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
                 <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
                 <div>
                   <p className="text-red-800 font-bold">Falha no envio</p>
-                  <p className="text-red-700 text-sm mt-1">{errorMessage || 'Ocorreu um erro técnico. Por favor, tente o WhatsApp para atendimento imediato.'}</p>
+                  <p className="text-red-700 text-sm mt-1">Ocorreu um erro técnico. Por favor, tente o WhatsApp para atendimento imediato.</p>
                 </div>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-bold text-foreground mb-2">Nome Completo</label>
+                <label htmlFor="name" className="block text-sm font-bold text-foreground mb-2">Nome Completo</label>
                 <input
+                  id="name"
                   type="text"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   placeholder="Ex: Maria Silva"
                   required
-                  disabled={status === 'submitting'}
+                  disabled={state.submitting || state.succeeded}
                   className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground focus:ring-2 focus:ring-accent outline-none transition-all disabled:opacity-50"
                 />
+                <ValidationError prefix="Nome" field="name" errors={state.errors} className="text-red-500 text-xs mt-1" />
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-foreground mb-2">E-mail</label>
+                  <label htmlFor="email" className="block text-sm font-bold text-foreground mb-2">E-mail</label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     placeholder="seu@email.com"
                     required
-                    disabled={status === 'submitting'}
+                    disabled={state.submitting || state.succeeded}
                     className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground focus:ring-2 focus:ring-accent outline-none transition-all disabled:opacity-50"
                   />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-foreground mb-2">Telefone</label>
+                  <label htmlFor="phone" className="block text-sm font-bold text-foreground mb-2">Telefone</label>
                   <input
+                    id="phone"
                     type="tel"
                     name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
                     placeholder="(11) 99999-9999"
                     required
-                    disabled={status === 'submitting'}
+                    disabled={state.submitting || state.succeeded}
                     className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground focus:ring-2 focus:ring-accent outline-none transition-all disabled:opacity-50"
                   />
+                  <ValidationError prefix="Telefone" field="phone" errors={state.errors} className="text-red-500 text-xs mt-1" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-foreground mb-2">Descreva Seu Caso</label>
+                <label htmlFor="message" className="block text-sm font-bold text-foreground mb-2">Descreva Seu Caso</label>
                 <textarea
+                  id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   placeholder="Conte-nos brevemente o que aconteceu..."
                   required
                   rows={4}
-                  disabled={status === 'submitting'}
+                  disabled={state.submitting || state.succeeded}
                   className="w-full px-4 py-3 border border-border rounded-lg bg-input text-foreground focus:ring-2 focus:ring-accent outline-none transition-all resize-none disabled:opacity-50"
                 />
+                <ValidationError prefix="Mensagem" field="message" errors={state.errors} className="text-red-500 text-xs mt-1" />
               </div>
 
               <button
                 type="submit"
-                disabled={status === 'submitting'}
+                disabled={state.submitting || state.succeeded}
                 className="w-full btn-gold py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-70"
               >
-                {status === 'submitting' ? (
+                {state.submitting ? (
                   <>
                     <Loader2 className="w-6 h-6 animate-spin" />
                     Processando Envio...
+                  </>
+                ) : state.succeeded ? (
+                  <>
+                    <CheckCircle2 className="w-6 h-6" />
+                    Enviado!
                   </>
                 ) : (
                   'Enviar Mensagem com Segurança'
