@@ -1,11 +1,11 @@
-/**
- * FAQ Section - Rita Salles Advocacia
- * Design: Accordion-style FAQ with common questions about health law
- * Features: Expandable Q&A, responsive layout
- */
-
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+
+/**
+ * FAQ Section - Rita Salles Advocacia
+ * Senior Refactor: Standardized accordion with high-performance transitions.
+ * Corrected legal content for clarity and technical accuracy.
+ */
 
 interface FAQItem {
   id: string;
@@ -17,42 +17,42 @@ const faqItems: FAQItem[] = [
   {
     id: 'reajuste-legal',
     question: 'Qual é o limite legal para reajuste de plano de saúde?',
-    answer: 'A Resolução Normativa nº 63/03 da ANS estabelece limites para reajustes por faixa etária. O reajuste não pode ser arbitrário e deve respeitar a variação acumulada entre as faixas. Reajustes acima de 131,5% em uma única faixa etária são frequentemente considerados abusivos.',
+    answer: 'Os reajustes devem observar critérios regulatórios e contratuais, especialmente no que se refere à proporcionalidade entre as faixas etárias e à variação acumulada ao longo do tempo, conforme normas da ANS. A análise de eventual abusividade depende do caso concreto, sendo considerados fatores como desproporcionalidade, ausência de transparência e incompatibilidade com os parâmetros regulatórios.',
   },
   {
     id: 'negacao-cobertura',
     question: 'O que fazer se meu plano negar cobertura?',
-    answer: 'A negativa de cobertura deve ser justificada pela operadora. Se você discordar, pode solicitar revisão administrativa ou judicial. Muitas negativas são consideradas abusivas quando não há justificativa legal válida. Recomendamos análise jurídica imediata.',
+    answer: 'A operadora deve apresentar justificativa adequada, com base no contrato, na legislação e nas normas da ANS. Caso haja dúvida quanto à legalidade da negativa, é possível buscar revisão administrativa ou judicial, especialmente quando houver indícios de restrição indevida de cobertura.',
   },
   {
     id: 'descredenciamento',
     question: 'Posso ser prejudicado por descredenciamento de hospital?',
-    answer: 'Sim. A Lei nº 9.656/98, Art. 17, exige aviso prévio de 30 dias para descredenciamento. Se você está em tratamento, a operadora deve garantir continuidade do cuidado. Descredenciamentos abruptos, especialmente em casos urgentes, são frequentemente ilegais.',
+    answer: 'Alterações na rede assistencial devem ser previamente informadas ao beneficiário e não podem comprometer a continuidade do tratamento. Em determinadas situações, especialmente quando há tratamento em curso, a substituição deve garantir condições equivalentes de atendimento, conforme entendimento consolidado da jurisprudência.',
   },
   {
     id: 'custos-acao',
-    question: 'Quanto custa uma ação judicial contra operadora de plano?',
-    answer: 'Os custos variam conforme o tipo de ação. Oferecemos consulta inicial gratuita para avaliar seu caso e discutir as opções de honorários. Muitos casos são viáveis e podem resultar em economia significativa para o cliente.',
+    question: 'Quanto custa uma ação judicial contra plano de saúde?',
+    answer: 'Os custos variam conforme a complexidade do caso e o tipo de demanda. Realizamos uma análise inicial para avaliar a viabilidade jurídica da medida e orientar o cliente quanto às possíveis estratégias e condições de atuação.',
   },
   {
     id: 'prazo-acao',
     question: 'Qual é o prazo para entrar com uma ação?',
-    answer: 'O prazo depende do tipo de ação. Para ações de cobrança, o prazo é de 5 anos. Para ações de reparação de danos, o prazo é de 3 anos. É importante agir rapidamente para preservar provas e direitos.',
+    answer: 'O prazo para propositura de ação varia conforme a natureza do direito discutido e as circunstâncias do caso concreto. Recomenda-se a análise individualizada para definição precisa do prazo aplicável e preservação dos direitos.',
   },
   {
     id: 'medida-liminar',
-    question: 'O que é medida liminar ou tutela de urgência?',
-    answer: 'É uma decisão judicial rápida que protege seus direitos enquanto o processo está em andamento. Pode obrigar a operadora a cobrir um tratamento ou a manter um hospital credenciado, por exemplo. É especialmente útil em casos urgentes.',
+    question: 'O que é tutela de urgência (liminar)?',
+    answer: 'Trata-se de medida judicial destinada a assegurar um direito de forma imediata, antes da decisão final do processo, quando presentes os requisitos legais. É frequentemente utilizada em situações que envolvem risco à saúde ou necessidade de continuidade de tratamento.',
   },
   {
     id: 'documentos-necessarios',
-    question: 'Quais documentos preciso para iniciar uma ação?',
-    answer: 'Documentos essenciais incluem: contrato do plano, comprovante de pagamento, correspondência da operadora (negativa de cobertura, aviso de reajuste, etc.), recibos médicos e comprovantes de tratamento. Quanto mais documentação, melhor.',
+    question: 'Quais documentos são necessários para iniciar uma ação?',
+    answer: 'Em geral, são relevantes documentos como contrato do plano de saúde, comprovantes de pagamento, comunicações da operadora (como negativas de cobertura ou avisos de reajuste), além de relatórios e prescrições médicas. A análise completa depende das particularidades de cada caso.',
   },
   {
     id: 'sucesso-garantido',
     question: 'Vocês garantem sucesso na ação?',
-    answer: 'Nenhum advogado pode garantir resultado. No entanto, analisamos cada caso cuidadosamente antes de aceitar. Nosso histórico mostra alta taxa de sucesso em casos de reajuste abusivo e negativa de cobertura infundada.',
+    answer: 'Não é possível garantir resultado em qualquer demanda judicial. Cada caso é analisado de forma criteriosa, com base na legislação aplicável e no entendimento dos tribunais, a fim de identificar as melhores estratégias jurídicas.',
   },
 ];
 
@@ -68,7 +68,7 @@ export default function FAQ() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6">
             Perguntas Frequentes
           </h2>
           <p className="text-lg text-foreground/70">
@@ -81,36 +81,43 @@ export default function FAQ() {
           {faqItems.map((item) => (
             <div
               key={item.id}
-              className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+              className="bg-card border border-border rounded-xl overflow-hidden hover:shadow-md transition-all duration-300"
             >
               <button
                 onClick={() => toggleFAQ(item.id)}
-                className="w-full px-6 py-4 flex items-center justify-between hover:bg-secondary/50 transition-colors text-left"
+                className="w-full px-6 py-5 flex items-center justify-between hover:bg-secondary/50 transition-colors text-left"
               >
-                <h3 className="text-lg font-semibold text-foreground pr-4">{item.question}</h3>
-                <ChevronDown
-                  className={`w-5 h-5 text-accent flex-shrink-0 transition-transform ${
-                    openId === item.id ? 'rotate-180' : ''
-                  }`}
-                />
+                <h3 className="text-lg font-bold text-foreground pr-4 leading-snug">{item.question}</h3>
+                <div className={`p-1 rounded-full bg-accent/10 transition-transform duration-300 ${openId === item.id ? 'rotate-180 bg-accent/20' : ''}`}>
+                  <ChevronDown className="w-5 h-5 text-accent flex-shrink-0" />
+                </div>
               </button>
 
-              {openId === item.id && (
-                <div className="px-6 py-4 bg-secondary/20 border-t border-border">
-                  <p className="text-foreground/70 leading-relaxed">{item.answer}</p>
+              <div 
+                className={`grid transition-all duration-300 ease-in-out ${
+                  openId === item.id ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-6 py-5 bg-secondary/20 border-t border-border">
+                    <p className="text-foreground/80 leading-relaxed text-base">{item.answer}</p>
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-lg text-foreground mb-6">
+        <div className="mt-16 text-center bg-slate-50 p-12 rounded-2xl border border-slate-100">
+          <p className="text-xl font-bold text-foreground mb-8">
             Ainda tem dúvidas? Entre em contato com nossos especialistas.
           </p>
-          <a href="#contato" className="btn-gold inline-block px-8 py-3 rounded-lg font-semibold text-lg hover:shadow-lg transition-all">
-            Agendar Consulta Gratuita
+          <a 
+            href="#contato" 
+            className="btn-gold inline-block px-12 py-4 rounded-lg font-extrabold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+          >
+            Solicitar Análise Inicial
           </a>
         </div>
       </div>
