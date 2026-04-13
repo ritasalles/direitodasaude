@@ -15,7 +15,8 @@ export default async function handler(
   }
 
   try {
-    const formspreeResponse = await fetch('https://formspree.io/f/mwpvjokl', {
+    // Novo ID do Formspree fornecido pelo usuário: meevqvbw
+    const formspreeResponse = await fetch('https://formspree.io/f/meevqvbw', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,9 +34,12 @@ export default async function handler(
     if (formspreeResponse.ok) {
       return response.status(200).json({ success: true });
     } else {
+      const errorData = await formspreeResponse.json();
+      console.error('Formspree error:', errorData);
       return response.status(500).json({ error: 'Failed to send message via gateway' });
     }
   } catch (error) {
+    console.error('Serverless function error:', error);
     return response.status(500).json({ error: 'Internal server error' });
   }
 }
