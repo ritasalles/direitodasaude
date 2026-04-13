@@ -102,6 +102,10 @@ export default function Contact() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Configurações Ocultas do Formspree para Garantir Entrega e Resposta Automática */}
+              <input type="hidden" name="_subject" value="Novo Contato: Rita Salles Advocacia" />
+              <input type="hidden" name="_language" value="pt-BR" />
+              
               <div>
                 <label htmlFor="name" className="block text-sm font-bold text-foreground mb-2">Nome Completo</label>
                 <input
