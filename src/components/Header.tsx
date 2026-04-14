@@ -26,7 +26,7 @@ export default function Header() {
             <img
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663330535777/fTMRKT8iPzDrzNpUA9nZT8/logotipo2026_87163b46.png"
               alt="Rita Salles Advocacia"
-              className="h-20 md:h-24 w-auto transition-all"
+              className="h-20 md:h-36 w-auto transition-all"
               title="Rita Salles Advocacia"
             />
           </div>

@@ -65,7 +65,7 @@ export default function Footer() {
               <li>
                 <p className="text-slate-500 text-xs uppercase font-bold mb-1">Endereço</p>
                 <p className="text-slate-300 leading-relaxed">
-                  Av. Paulista, 2028, 11º and., conj. 111<br />
+                  Avenida Paulista, 2028, 11º Andar, Cj. 111<br />
                   Bela Vista, São Paulo/SP
                 </p>
               </li>

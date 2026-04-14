@@ -2,6 +2,7 @@
  * Contact Section - Rita Salles Advocacia
  * Senior Refactor: Optimized form and contact flow with OAB-compliant CTAs.
  * Mobile-first priority with clear action hierarchy.
+ * Formspree integration for static environments.
  */
 
 import { useState } from 'react';
@@ -35,16 +36,17 @@ export default function Contact() {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
+      // Formspree Integration for Vercel Static Deployments
+      const response = await fetch('https://formspree.io/f/xanyzjpz', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', phone: '', message: '' });
-        setTimeout(() => setStatus('idle'), 10000);
+        setTimeout(() => setStatus('idle'), 15000);
       } else {
         const data = await response.json();
         throw new Error(data.error || 'Falha no processamento do envio');
@@ -89,7 +91,7 @@ export default function Contact() {
               <div className="p-4 bg-white rounded-xl border border-border">
                 <MapPin className="w-6 h-6 text-accent mb-3" />
                 <p className="font-bold text-foreground">Endereço</p>
-                <p className="text-sm text-foreground/60">Av. Paulista, 2028, 11º and., conj. 111, Bela Vista, São Paulo/SP</p>
+                <p className="text-sm text-foreground/60">Avenida Paulista, 2028, 11º Andar, Cj. 111, Bela Vista, São Paulo/SP</p>
               </div>
               <div className="p-4 bg-white rounded-xl border border-border">
                 <Clock className="w-6 h-6 text-accent mb-3" />
