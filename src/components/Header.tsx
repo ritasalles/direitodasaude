@@ -26,7 +26,7 @@ export default function Header() {
             <img
               src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663330535777/WcdzfogRmoyBegLP.png"
               alt="Rita Salles Advocacia"
-              className="h-16 md:h-20 w-auto transition-all"
+              className="h-20 md:h-28 w-auto transition-all brightness-110 contrast-110 drop-shadow-md"
               title="Rita Salles Advocacia"
             />
           </div>
