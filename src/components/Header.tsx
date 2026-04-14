@@ -24,9 +24,9 @@ export default function Header() {
           {/* Logo - Sized proportionally to the CTA button */}
           <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663330535777/fTMRKT8iPzDrzNpUA9nZT8/logotipo2026_87163b46.png"
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663330535777/WcdzfogRmoyBegLP.png"
               alt="Rita Salles Advocacia"
-              className="h-20 md:h-36 w-auto transition-all"
+              className="h-16 md:h-20 w-auto transition-all"
               title="Rita Salles Advocacia"
             />
           </div>
