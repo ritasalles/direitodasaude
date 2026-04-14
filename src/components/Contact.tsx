@@ -89,7 +89,7 @@ export default function Contact() {
               <div className="p-4 bg-white rounded-xl border border-border">
                 <MapPin className="w-6 h-6 text-accent mb-3" />
                 <p className="font-bold text-foreground">Endereço</p>
-                <p className="text-sm text-foreground/60">Av. Paulista, 2028, 11º Andar</p>
+                <p className="text-sm text-foreground/60">Av. Paulista, 2028, 11º and., conj. 111, Bela Vista, São Paulo/SP</p>
               </div>
               <div className="p-4 bg-white rounded-xl border border-border">
                 <Clock className="w-6 h-6 text-accent mb-3" />
@@ -116,9 +116,13 @@ export default function Contact() {
             {status === 'success' && (
               <div className="mb-8 p-4 bg-green-50 border border-green-200 rounded-xl flex items-start gap-3 animate-in fade-in zoom-in-95">
                 <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />
-                <div>
-                  <p className="text-green-800 font-bold">Mensagem enviada com sucesso!</p>
-                  <p className="text-green-700 text-sm mt-1">Analisaremos seu caso e entraremos em contato em breve.</p>
+                <div className="text-green-800 text-sm space-y-2">
+                  <p className="font-bold text-base">Mensagem enviada com sucesso!</p>
+                  <p>Prezado(a),</p>
+                  <p>Agradecemos o seu contato. Sua mensagem foi recebida e será analisada com a devida atenção por nossa equipe.</p>
+                  <p>Em breve, retornaremos para dar andamento à sua solicitação.</p>
+                  <p>Permanecemos à disposição.</p>
+                  <p className="font-semibold italic">Cordialmente,<br />Rita Salles Advocacia e Consultoria Jurídica</p>
                 </div>
               </div>
             )}

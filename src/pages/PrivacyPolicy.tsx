@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
           <section className="bg-slate-50 p-6 rounded-xl border border-slate-200">
             <h3 className="font-bold text-slate-900 mb-2">Controlador de Dados:</h3>
             <p className="text-sm">Rita Salles Advocacia</p>
-            <p className="text-sm">Avenida Paulista, 2028, 11º Andar, São Paulo/SP</p>
+            <p className="text-sm">Av. Paulista, 2028, 11º and., conj. 111, Bela Vista, São Paulo/SP</p>
             <p className="text-sm">CNPJ: [Inserir CNPJ se aplicável]</p>
           </section>
 

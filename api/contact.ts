@@ -37,7 +37,7 @@ export default async function handler(
         _replyto: email,
         _language: 'pt-BR',
         _template: 'basic',
-        _autoresponse: `Prezado Sr.(a). Agradecemos seu contato e entraremos em contato com celeridade. Cordialmente, Rita Salles Advocacia e Consultoria Jurídica.`
+        _autoresponse: `Prezado(a),\n\nAgradecemos o seu contato. Sua mensagem foi recebida e será analisada com a devida atenção por nossa equipe.\n\nEm breve, retornaremos para dar andamento à sua solicitação.\n\nPermanecemos à disposição.\n\nCordialmente,\nRita Salles Advocacia e Consultoria Jurídica`
       }),
     });
 
